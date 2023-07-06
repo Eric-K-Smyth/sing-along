@@ -26,7 +26,7 @@ fetch(authOptions.url, {
 function searchSong() {
   var searchInput = document.getElementById('searchInput').value;
 
-  fetch(`https://api.spotify.com/v1/search?q=${searchInput}&type=track`, {
+  fetch(`https://api.spotify.com/v1/search?q=${searchInput}&type=track&limit=5`, {
     headers: {
       'Authorization': `Bearer ${accessToken}`
     }
@@ -40,10 +40,15 @@ function searchSong() {
         var trackName = track.name;
         var artistName = track.artists[0].name;
         var albumName = track.album.name;
+        var albumIconUrl = track.album.images[0].url;
 
         var li = document.createElement('li');
         li.textContent = `${trackName} - ${artistName} (${albumName})`;
 
+        var img = document.createElement('img');
+        img.src = albumIconUrl;
+
+        li.appendChild(img);
         resultsContainer.appendChild(li);
       });
     })
