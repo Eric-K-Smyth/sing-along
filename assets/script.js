@@ -55,26 +55,50 @@ function searchSong() {
     .catch(error => console.error(error));
 }
 
-var input = "winter";//to be changed dynamically through JS
-var perPage = 3;//to be changed dynamically through JS
+//-------------------------GENIUS CODE-----------------------------------
+var input = "money";//to be changed dynamically through JS
+var perPage = 5;//to be changed dynamically through JS
 
 const settings = {
-	async: true,
-	crossDomain: true,
-	url: `https://genius-song-lyrics1.p.rapidapi.com/search/?q=${input}&per_page=${perPage}&page=1`,
-	method: 'GET',
-	headers: {
-		'X-RapidAPI-Key': '8190159c34mshdcc9f9a352eb11bp12ac68jsn0567caeef1e7',
-		'X-RapidAPI-Host': 'genius-song-lyrics1.p.rapidapi.com'
-	}
+  async: true,
+  crossDomain: true,
+  url: `https://genius-song-lyrics1.p.rapidapi.com/search/?q=${input}&per_page=${perPage}&page=1`,
+  method: 'GET',
+  headers: {
+    'X-RapidAPI-Key': '8190159c34mshdcc9f9a352eb11bp12ac68jsn0567caeef1e7',
+    'X-RapidAPI-Host': 'genius-song-lyrics1.p.rapidapi.com'
+  }
 };
 
 $.ajax(settings).then(function (response) {
-	console.log(response);
-    for (var entry of response){
-        var artistName = entry.hits[1].result.artist_names;
-        console.log(`Artist: ${artistName}`);
+  console.log(response);
+  
+  for (var i=0; i<response.hits.length; i++) {
+    var artistNames = response.hits[i].result.artist_names;
+    var songID = response.hits[i].result.id;
+    var lyricsURL = response.hits[i].result.url;
+
+    console.log(`Artist: ${artistNames}`);
+    console.log(`ID: ${songID}`);
+    console.log(`Lyrics URL: ${lyricsURL}`);
+
+    const getLyrics = {
+      async: true,
+      crossDomain: true,
+      url: `https://genius-song-lyrics1.p.rapidapi.com/song/lyrics/?id=${songID}`,
+      method: 'GET',
+      headers: {
+        'X-RapidAPI-Key': '8190159c34mshdcc9f9a352eb11bp12ac68jsn0567caeef1e7',
+        'X-RapidAPI-Host': 'genius-song-lyrics1.p.rapidapi.com'
       }
+    };
+
+    $.ajax(getLyrics).then(function (lyricsUrlResponse) {
+      console.log(lyricsUrlResponse);
+      console.log(lyricsUrlResponse.lyrics.lyrics.body.html);
+    });
+  } //for loop ends
 });
+//-------------------------GENIUS CODE ENDS-----------------------------------
 
 
