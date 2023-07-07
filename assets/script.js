@@ -55,7 +55,6 @@ function searchSong() {
     .catch(error => console.error(error));
 }
 
-
 //-------------------------GENIUS CODE-----------------------------------
 var input = "money";//to be changed dynamically through JS
 var perPage = 5;//to be changed dynamically through JS
