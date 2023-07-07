@@ -55,4 +55,26 @@ function searchSong() {
     .catch(error => console.error(error));
 }
 
+var input = "winter";//to be changed dynamically through JS
+var perPage = 3;//to be changed dynamically through JS
+
+const settings = {
+	async: true,
+	crossDomain: true,
+	url: `https://genius-song-lyrics1.p.rapidapi.com/search/?q=${input}&per_page=${perPage}&page=1`,
+	method: 'GET',
+	headers: {
+		'X-RapidAPI-Key': '8190159c34mshdcc9f9a352eb11bp12ac68jsn0567caeef1e7',
+		'X-RapidAPI-Host': 'genius-song-lyrics1.p.rapidapi.com'
+	}
+};
+
+$.ajax(settings).then(function (response) {
+	console.log(response);
+    for (var entry of response){
+        var artistName = entry.hits[1].result.artist_names;
+        console.log(`Artist: ${artistName}`);
+      }
+});
+
 
