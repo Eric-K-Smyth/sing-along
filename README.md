@@ -1,5 +1,5 @@
-# <Sing-Along>
-
+# Sing-Along
+https://eric-k-smyth.github.io/sing-along/
 ## Description
 This project was built as a way for someone to search for the lyrics of their favorite songs to give them the ability to sing along!
 This project solves information on sings, artists, and lyrics not being displayed in a digestible manner.
@@ -16,13 +16,13 @@ The website displays the song name, artist name, album cover, and lyrics.
 
 
 ## Credits
-Hazkeel A. Qureshi https://github.com/hazkeel27
-Dave-Tercey https://github.com/Dave-Tercey
-Temuulen Tsengel https://github.com/temuts
-Eric Smyth https://github.com/Eric-K-Smyth
+- Hazkeel A. Qureshi https://github.com/hazkeel27
+- Dave-Tercey https://github.com/Dave-Tercey
+- Temuulen Tsengel https://github.com/temuts
+- Eric Smyth https://github.com/Eric-K-Smyth
 
-Spotify Api
-Genius Api
+- Spotify Api https://developer.spotify.com/documentation/web-api
+- Genius Api https://docs.genius.com/
 
 
 ## License
