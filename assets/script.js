@@ -33,8 +33,15 @@ function searchSong() {
   })
     .then(response => response.json())
     .then(data => {
-      var resultsContainer = document.getElementById('results');
-      resultsContainer.innerHTML = '';
+      var resultRow = document.getElementById('result-row');
+      resultRow.innerHTML = '';
+
+      var row1 = document.createElement("div");
+      row1.className = "row";
+      var row2 = document.createElement("div");
+      row2.className = "row";
+
+      var cardCount = 0;
 
       data.tracks.items.forEach(track => {
         var trackName = track.name;
@@ -42,15 +49,34 @@ function searchSong() {
         var albumName = track.album.name;
         var albumIconUrl = track.album.images[0].url;
 
-        var li = document.createElement('li');
-        li.textContent = `${trackName} - ${artistName} (${albumName})`;
-
-        var img = document.createElement('img');
+        var colEl = document.createElement("div");
+        colEl.className = "col s12 m4 l4";
+        var cardEl = document.createElement("div");
+        cardEl.className = "card";
+        var cardImageEl = document.createElement("div");
+        cardImageEl.className = "card-image";
+        var img = document.createElement("img");
         img.src = albumIconUrl;
+        var caption = document.createElement("span");
+        caption.className = "card-caption";
 
-        li.appendChild(img);
-        resultsContainer.appendChild(li);
+        caption.textContent = `${trackName} - ${artistName} (${albumName})`;
+
+        cardImageEl.appendChild(img);
+        cardImageEl.appendChild(caption);
+        cardEl.appendChild(cardImageEl);
+        colEl.appendChild(cardEl);
+
+        if (cardCount % 2 === 0) {
+          row1.appendChild(colEl);
+        } else {
+          row2.appendChild(colEl);
+        }
+
+        cardCount++;
       });
+        resultRow.appendChild(row1);
+        resultRow.appendChild(row2);
     })
     .catch(error => console.error(error));
 }
