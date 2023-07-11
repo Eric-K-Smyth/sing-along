@@ -40,3 +40,7 @@ input:focus {
 label.active {
     color:rgb(220, 177, 248) !important;
 }
+
+.card-image{
+    background-color: black;
+}
