@@ -86,6 +86,7 @@ document.addEventListener('DOMContentLoaded', function() {
   searchButton.addEventListener('click', searchSong);
 });
 
+/*
 //-------------------------GENIUS CODE-----------------------------------
 var input = "winter";//to be changed dynamically through JS
 var perPage = 5;//to be changed dynamically through JS
@@ -131,5 +132,5 @@ $.ajax(settings).then(function (response) {
   } //for loop ends
 });
 //-------------------------GENIUS CODE ENDS-----------------------------------
-
+*/
 
