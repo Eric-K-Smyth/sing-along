@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 //-------------------------GENIUS CODE-----------------------------------
-var input = "money";//to be changed dynamically through JS
+var input = "winter";//to be changed dynamically through JS
 var perPage = 5;//to be changed dynamically through JS
 
 const settings = {
@@ -119,7 +119,7 @@ $.ajax(settings).then(function (response) {
       url: `https://genius-song-lyrics1.p.rapidapi.com/song/lyrics/?id=${songID}`,
       method: 'GET',
       headers: {
-        'X-RapidAPI-Key': '8190159c34mshdcc9f9a352eb11bp12ac68jsn0567caeef1e7',
+        'X-RapidAPI-Key': 'd476c41e5cmshe22d6200376fc94p1fa145jsn076fdfd5f8eb',
         'X-RapidAPI-Host': 'genius-song-lyrics1.p.rapidapi.com'
       }
     };
