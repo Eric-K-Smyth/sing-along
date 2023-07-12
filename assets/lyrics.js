@@ -1,16 +1,17 @@
-var input = "money";//to be changed dynamically through JS
-var perPage = 5;//to be changed dynamically through JS
+var input = "Money Trees - Kendrick Lamar (good kid, m.A.A.d city)";//to be changed dynamically through JS
+input = input.split('-');
 
 var lyricsContainerDiv = $('#lyrics-container');
+var songInfoDiv = $('#song-info');
 
 const settings = {
   async: true,
   crossDomain: true,
-  url: `https://genius-song-lyrics1.p.rapidapi.com/search/?q=${input}&per_page=${perPage}&page=1`,
+  url: `https://genius-song-lyrics1.p.rapidapi.com/search/?q=${input[0]}&per_page=1&page=1`,
   method: 'GET',
   cache: true,
   headers: {
-    'X-RapidAPI-Key': '650f891468msh2daef7dcb2d159dp113f1bjsn1d4998ee4778',
+    'X-RapidAPI-Key': 'aa9dd97b71mshff54ea437ac6bd6p1038d2jsn9c6ebfb689e2',
     'X-RapidAPI-Host': 'genius-song-lyrics1.p.rapidapi.com'
   }
 };
@@ -34,7 +35,7 @@ $.ajax(settings).then(function (response) {
       method: 'GET',
       cache: true,
       headers: {
-        'X-RapidAPI-Key': '650f891468msh2daef7dcb2d159dp113f1bjsn1d4998ee4778',
+        'X-RapidAPI-Key': 'aa9dd97b71mshff54ea437ac6bd6p1038d2jsn9c6ebfb689e2',
         'X-RapidAPI-Host': 'genius-song-lyrics1.p.rapidapi.com'
       }
     };
@@ -43,36 +44,41 @@ $.ajax(settings).then(function (response) {
 
       var artist = lyricsUrlResponse.lyrics.tracking_data.primary_artist;
       var song = lyricsUrlResponse.lyrics.tracking_data.title;
+      var year = lyricsUrlResponse.lyrics.tracking_data.created_year;
+      var genre = lyricsUrlResponse.lyrics.tracking_data.primary_tag;
       var lyricsHTML = lyricsUrlResponse.lyrics.lyrics.body.html;
       var updatedLyricsHTML = $(lyricsHTML).find('a').replaceWith(function() {
         return '<span>' + $(this).text() + '</span>';
       }).end().prop('outerHTML');
 
       console.log(lyricsUrlResponse);
-      console.log(lyricsHTML);
 
-      var songDiv = $('<div></div>');
       var artistNameSpan = $('<span></span>');
       var songNameSpan = $('<span></span>');
+      var yearSpan = $('<span></span>');
+      var genreSpan = $('<span></span>');
       var lyricsSpan = $('<span></span>');
 
-      var linebreak1 = $('<br>');
-      var linebreak2 = $('<br>');
-      var linebreak3 = $('<br>');
-      var linebreak4 = $('<br>');
+      var br1 = $('<br>');
+      var br2 = $('<br>');
+      var br3 = $('<br>');
+      var br4 = $('<br>');
 
-      artistNameSpan.text(`artist: ${artist}`);
-      songNameSpan.text(`song: ${song}`);
-      lyricsSpan.html(`lyrics: ${updatedLyricsHTML}`);
+      artistNameSpan.text(`Artist: ${artist}`);
+      songNameSpan.text(`Song: ${song}`);
+      yearSpan.text(`Year: ${year}`);
+      genreSpan.text(`Genre: ${genre}`);
+      lyricsSpan.html(`Lyrics: ${updatedLyricsHTML}`);
 
-      songDiv.append(artistNameSpan);
-      songDiv.append(linebreak1);
-      songDiv.append(songNameSpan);
-      songDiv.append(linebreak2);
-      songDiv.append(lyricsSpan);
-      songDiv.append(linebreak3);
-      songDiv.append(linebreak4);
-      lyricsContainerDiv.append(songDiv);
+      songInfoDiv.append(artistNameSpan);
+      songInfoDiv.append(br1);
+      songInfoDiv.append(songNameSpan);
+      songInfoDiv.append(br2);
+      songInfoDiv.append(yearSpan);
+      songInfoDiv.append(br3);
+      songInfoDiv.append(genreSpan);
+
+      lyricsContainerDiv.append(lyricsSpan);
       
 
     });
