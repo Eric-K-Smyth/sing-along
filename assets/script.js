@@ -61,11 +61,20 @@ function searchSong() {
         caption.className = "card-caption";
 
         caption.textContent = `${trackName} - ${artistName} (${albumName})`;
+        caption.style.visibility = "hidden";
 
         cardImageEl.appendChild(img);
         cardImageEl.appendChild(caption);
         cardEl.appendChild(cardImageEl);
         colEl.appendChild(cardEl);
+
+        img.addEventListener("mouseover", function() {
+          caption.style.visibility = "visible";
+        });
+
+      img.addEventListener("mouseout", function() {
+          caption.style.visibility = "hidden";
+        });
 
         if (cardCount % 2 === 0) {
           row1.appendChild(colEl);
