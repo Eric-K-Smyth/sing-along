@@ -1,6 +1,7 @@
 var client_id = '0d29a13314704580a8e1dbb68e0ec812';
 var client_secret = 'd26b235197614f57ba9708b20366a313';
 var accessToken;
+var searchHistory = [];
 
 var authOptions = {
   method: 'POST',
@@ -23,7 +24,17 @@ fetch(authOptions.url, {
   })
   .catch(error => console.error(error));
 
-function searchSong() {
+  function loadSearchHistory() {
+    var storedSearchHistory = localStorage.getItem('searchHistory');
+    if (storedSearchHistory) {
+      searchHistory = JSON.parse(storedSearchHistory);
+      displaySearchHistory();
+    }
+  }
+
+
+
+  function searchSong() {
   var searchInput = document.getElementById('searchInput').value;
 
   fetch(`https://api.spotify.com/v1/search?q=${searchInput}&type=track&limit=5`, {
@@ -72,18 +83,77 @@ function searchSong() {
         } else {
           row2.appendChild(colEl);
         }
-
+           // Create a click event listener to save the song to the search history
+        cardImageEl.addEventListener('click', function () {
+        saveToSearchHistory(trackName, artistName, albumName, albumIconUrl);
+      });
         cardCount++;
       });
         resultRow.appendChild(row1);
         resultRow.appendChild(row2);
+
+        displaySearchHistory();
     })
     .catch(error => console.error(error));
+}
+
+function saveToSearchHistory(trackName, artistName, albumName, albumIconUrl) {
+  // Create an object representing the song
+  var song = {
+    trackName: trackName,
+    artistName: artistName,
+    albumName: albumName,
+    albumIconUrl: albumIconUrl
+  };
+
+  // Remove the oldest item if search history exceeds 5 items
+  if (searchHistory.length >= 5) {
+    searchHistory.shift();
+  }
+
+  // Add the song to the search history
+  searchHistory.push(song);
+
+  // Update the search history display
+  displaySearchHistory();
+
+  localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
+}
+
+function displaySearchHistory() {
+  var searchHistoryContainer = document.getElementById('search-history');
+  searchHistoryContainer.innerHTML = '';
+  searchHistoryContainer.classList.add('search-history-container');
+   
+  
+  if (searchHistory.length > 0) {
+  var title = document.createElement('h6');
+  title.textContent = 'History';
+  searchHistoryContainer.appendChild(title);
+   }
+
+  searchHistory.forEach(function (song) {
+    var albumIcon = document.createElement('img');
+    albumIcon.src = song.albumIconUrl;
+    albumIcon.style.width = '100px'; // Set width to 100px
+    albumIcon.style.height = '100px'; // Set height to 100px
+
+    albumIcon.addEventListener('click', function () {
+      // Re-search the clicked item
+      document.getElementById('searchInput').value = song.trackName;
+      searchSong();
+      saveToSearchHistory(song.trackName, song.artistName, song.albumName, song.albumIconUrl);
+    });
+
+    searchHistoryContainer.appendChild(albumIcon);
+  });
 }
 
 document.addEventListener('DOMContentLoaded', function() {
   var searchButton = document.getElementById('search-button');
   searchButton.addEventListener('click', searchSong);
+
+  loadSearchHistory();
 });
 
 //-------------------------GENIUS CODE-----------------------------------
