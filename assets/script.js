@@ -95,6 +95,8 @@ fetch(authOptions.url, {
            // Create a click event listener to save the song to the search history
         cardImageEl.addEventListener('click', function () {
         saveToSearchHistory(trackName, artistName, albumName, albumIconUrl);
+        window.location.href = "lyrics.html";
+        //goes to lyric page
       });
         cardCount++;
       });
