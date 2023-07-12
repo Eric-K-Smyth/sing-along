@@ -72,11 +72,20 @@ fetch(authOptions.url, {
         caption.className = "card-caption";
 
         caption.textContent = `${trackName} - ${artistName} (${albumName})`;
+        caption.style.visibility = "hidden";
 
         cardImageEl.appendChild(img);
         cardImageEl.appendChild(caption);
         cardEl.appendChild(cardImageEl);
         colEl.appendChild(cardEl);
+
+        img.addEventListener("mouseover", function() {
+          caption.style.visibility = "visible";
+        });
+
+      img.addEventListener("mouseout", function() {
+          caption.style.visibility = "hidden";
+        });
 
         if (cardCount % 2 === 0) {
           row1.appendChild(colEl);
@@ -156,8 +165,9 @@ document.addEventListener('DOMContentLoaded', function() {
   loadSearchHistory();
 });
 
+/*
 //-------------------------GENIUS CODE-----------------------------------
-var input = "money";//to be changed dynamically through JS
+var input = "winter";//to be changed dynamically through JS
 var perPage = 5;//to be changed dynamically through JS
 
 const settings = {
@@ -189,7 +199,7 @@ $.ajax(settings).then(function (response) {
       url: `https://genius-song-lyrics1.p.rapidapi.com/song/lyrics/?id=${songID}`,
       method: 'GET',
       headers: {
-        'X-RapidAPI-Key': '8190159c34mshdcc9f9a352eb11bp12ac68jsn0567caeef1e7',
+        'X-RapidAPI-Key': 'd476c41e5cmshe22d6200376fc94p1fa145jsn076fdfd5f8eb',
         'X-RapidAPI-Host': 'genius-song-lyrics1.p.rapidapi.com'
       }
     };
@@ -201,5 +211,5 @@ $.ajax(settings).then(function (response) {
   } //for loop ends
 });
 //-------------------------GENIUS CODE ENDS-----------------------------------
-
+*/
 
