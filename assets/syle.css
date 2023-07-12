@@ -41,6 +41,36 @@ label.active {
     color:rgb(220, 177, 248) !important;
 }
 
-.card-image{
+
+.card-image {
     background-color: black;
+    position: relative;
+    overflow: hidden; 
 }
+
+.card-image img {
+    transition: transform 0.3s, box-shadow 0.3s; 
+}
+
+.card-image:hover img {
+    transform: scale(1.1); 
+    filter: brightness(60%); 
+}
+
+.card-caption {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    padding: 5px;
+    font-size: 16px;
+    opacity: 0;
+    transition: opacity 0.3s; 
+}
+
+.card-image:hover .card-caption {
+    opacity: 1; 
+}
+
+
