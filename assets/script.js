@@ -109,6 +109,19 @@ fetch(authOptions.url, {
 }
 
 function saveToSearchHistory(trackName, artistName, albumName, albumIconUrl) {
+  
+   // Check if the song already exists in the search history
+   var duplicateSong = searchHistory.find(function(song) {
+    return song.trackName === trackName &&
+           song.artistName === artistName &&
+           song.albumName === albumName &&
+           song.albumIconUrl === albumIconUrl;
+  });
+
+  if (duplicateSong) {
+    return; // Skip adding duplicate entries
+  }
+
   // Create an object representing the song
   var song = {
     trackName: trackName,
@@ -150,10 +163,8 @@ function displaySearchHistory() {
     albumIcon.style.height = '100px'; // Set height to 100px
 
     albumIcon.addEventListener('click', function () {
-      // Re-search the clicked item
-      document.getElementById('searchInput').value = song.trackName;
-      searchSong();
-      saveToSearchHistory(song.trackName, song.artistName, song.albumName, song.albumIconUrl);
+      window.location.href = "lyrics.html";
+      
     });
 
     searchHistoryContainer.appendChild(albumIcon);
