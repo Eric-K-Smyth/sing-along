@@ -157,7 +157,12 @@ The flex-direction is set to column, arranging the flex items vertically.
     flex-direction: column;
   }
 
-
+/*
+This code applies styles to elements with the class "scrollable-container".
+The position is set to fixed, which means the element is positioned relative to the browser window.
+The top, bottom, left, and right properties are set to 0, which means the element spans the entire window.
+The overflow property is set to auto, which enables scrolling when the content exceeds the container's dimensions.
+*/
 .scrollable-container {
     position: fixed;
     top: 0;
@@ -166,10 +171,22 @@ The flex-direction is set to column, arranging the flex items vertically.
     right: 0;
     overflow: auto;
 }
+
+/*
+This code applies styles to elements with the class "scrollable-content".
+The width and height are set to 100%, which means the content will take up the entire space of its parent container.
+*/
 .scrollable-content {
     width: 100%;
     height: 100%;
 }
+
+/*
+This code applies styles to elements with the class "scrollable-iframe".
+The width is set to 80% of its parent container.
+The height is set to 500 pixels.
+The border property is set to none, removing any border around the iframe.
+*/
 .scrollable-iframe {
     width: 80%;
     height: 500px;
