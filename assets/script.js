@@ -159,6 +159,7 @@ function displaySearchHistory() {
   searchHistory.forEach(function (song) {
     var albumIcon = document.createElement('img');
     albumIcon.src = song.albumIconUrl;
+    albumIcon.className = "history-icon";
     albumIcon.style.width = '100px'; // Set width to 100px
     albumIcon.style.height = '100px'; // Set height to 100px
 
