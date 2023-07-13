@@ -4,29 +4,28 @@ input = input.split('-');
 var lyricsContainerDiv = $('#lyrics-container');
 var songInfoDiv = $('#song-info');
 
+var trackInfoArray = JSON.parse(localStorage.getItem('searchHistory'));
+var trackInfo = trackInfoArray[trackInfoArray.length - 1];
+var trackName = trackInfo.trackName;
+
 const settings = {
   async: true,
   crossDomain: true,
-  url: `https://genius-song-lyrics1.p.rapidapi.com/search/?q=${input[0]}&per_page=1&page=1`,
+  url: `https://genius-song-lyrics1.p.rapidapi.com/search/?q=${trackName}&per_page=1&page=1`,
   method: 'GET',
   cache: true,
   headers: {
-    'X-RapidAPI-Key': 'aa9dd97b71mshff54ea437ac6bd6p1038d2jsn9c6ebfb689e2',
+    'X-RapidAPI-Key': '286c8ba4c7msh0915c4905dcf20bp1e34ccjsn8173d621f28b',
     'X-RapidAPI-Host': 'genius-song-lyrics1.p.rapidapi.com'
   }
 };
 
 $.ajax(settings).then(function (response) {
-  console.log(response);
-  
+
   for (var i=0; i<response.hits.length; i++) {
     var artistNames = response.hits[i].result.artist_names;
     var songID = response.hits[i].result.id;
     var lyricsURL = response.hits[i].result.url;
-
-    console.log(`Artist: ${artistNames}`);
-    console.log(`ID: ${songID}`);
-    console.log(`Lyrics URL: ${lyricsURL}`);
 
     const getLyrics = {
       async: true,
@@ -35,7 +34,7 @@ $.ajax(settings).then(function (response) {
       method: 'GET',
       cache: true,
       headers: {
-        'X-RapidAPI-Key': 'aa9dd97b71mshff54ea437ac6bd6p1038d2jsn9c6ebfb689e2',
+        'X-RapidAPI-Key': '286c8ba4c7msh0915c4905dcf20bp1e34ccjsn8173d621f28b',
         'X-RapidAPI-Host': 'genius-song-lyrics1.p.rapidapi.com'
       }
     };
@@ -51,8 +50,32 @@ $.ajax(settings).then(function (response) {
         return '<span>' + $(this).text() + '</span>';
       }).end().prop('outerHTML');
 
-      console.log(lyricsUrlResponse);
+      
+      const getSongDetails = {
+        async: true,
+        crossDomain: true,
+        url: `https://genius-song-lyrics1.p.rapidapi.com/song/details/?id=${songID}`,
+        method: 'GET',
+        cache: true,
+        headers: {
+          'X-RapidAPI-Key': '286c8ba4c7msh0915c4905dcf20bp1e34ccjsn8173d621f28b',
+          'X-RapidAPI-Host': 'genius-song-lyrics1.p.rapidapi.com'
+        }
+      };
 
+      var albumCoverDiv = $('<div></div>');
+
+      $.ajax(getSongDetails).then(function (songDetailsUrlResponse) {
+        var albumCoverUrl = songDetailsUrlResponse.song.header_image_thumbnail_url;
+        var youtubeUrl = songDetailsUrlResponse.song.youtube_url;
+
+        var albumCoverImg = $('<img>');
+        albumCoverImg.attr('src', albumCoverUrl);
+        albumCoverImg.attr('alt', 'Album Cover Image');
+
+        albumCoverDiv.append(albumCoverImg);
+      });
+      
       var artistNameSpan = $('<span></span>');
       var songNameSpan = $('<span></span>');
       var yearSpan = $('<span></span>');
@@ -63,24 +86,25 @@ $.ajax(settings).then(function (response) {
       var br2 = $('<br>');
       var br3 = $('<br>');
       var br4 = $('<br>');
+      
+      artistNameSpan.text(artist);
+      songNameSpan.text(song);
+      yearSpan.text(year);
+      genreSpan.text(genre.toUpperCase());
+      lyricsSpan.html(updatedLyricsHTML);
 
-      artistNameSpan.text(`Artist: ${artist}`);
-      songNameSpan.text(`Song: ${song}`);
-      yearSpan.text(`Year: ${year}`);
-      genreSpan.text(`Genre: ${genre}`);
-      lyricsSpan.html(`Lyrics: ${updatedLyricsHTML}`);
-
-      songInfoDiv.append(artistNameSpan);
+      songInfoDiv.append(albumCoverDiv);
       songInfoDiv.append(br1);
-      songInfoDiv.append(songNameSpan);
+      songInfoDiv.append(artistNameSpan);
       songInfoDiv.append(br2);
-      songInfoDiv.append(yearSpan);
+      songInfoDiv.append(songNameSpan);
       songInfoDiv.append(br3);
+      songInfoDiv.append(yearSpan);
+      songInfoDiv.append(br4);
       songInfoDiv.append(genreSpan);
 
       lyricsContainerDiv.append(lyricsSpan);
       
-
     });
   } //for loop ends
 });
