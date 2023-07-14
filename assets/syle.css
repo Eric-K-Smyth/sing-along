@@ -1,62 +1,132 @@
+/*
+This code sets the font family to Verdana, Geneva, Tahoma or a generic sans-serif font for elements with the class "text".
+The text color is set to an RGB value of (234, 200, 254), which represents a shade of purple.
+*/
 .text{
     font-family:Verdana, Geneva, Tahoma, sans-serif;
     color:rgb(234, 200, 254);
 }
 
+/*
+This code applies styles to the body element.
+The display property is set to flex, which enables a flexible layout for its children.
+min-height is set to 100vh, which means the body should have a minimum height of 100% of the viewport height.
+flex-direction is set to column, which arranges the flex items vertically.
+*/
 body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
 }
 
+/*
+This code applies styles to the main element.
+flex property is set to 1 0 auto, which allows the element to grow and shrink as needed, but not to basis size.
+*/
 main {
     flex: 1 0 auto;
 }
 
+/*
+This code applies styles to elements with the class "footer-heading".
+font-size is set to 20 pixels.
+font-weight is set to bold.
+*/
 .footer-heading{
     font-size: 20px;
     font-weight: bold;
 }
 
+/*
+This code applies styles to an element with the ID "search-button".
+The background color is set to an RGB value of (220, 177, 248), which represents a shade of purple.
+The text color is set to black.
+*/
 #search-button{
     background-color:rgb(220, 177, 248);
     color: black;
 }
 
+/*
+This code applies styles to an element with the ID "header-text".
+The font size is set to 50 pixels.
+The font weight is set to bold.
+*/
 #header-text{
     font-size: 50px;
     font-weight: bold ;
 }
 
+/*
+This code applies styles to an element with the ID "searchInput".
+The text color is set to "aliceblue", which represents a shade of light blue.
+*/
 #searchInput{
     color: aliceblue;
 }
 
+/*
+This code applies styles to focused input elements.
+A 1-pixel solid white border is added to the bottom of the input element.
+A white box shadow is applied to give a visual effect.
+"!important" ensures that these styles override any other conflicting styles.
+*/
 input:focus {
     border-bottom: 1px solid rgb(255, 255, 255);
     box-shadow: 0 1px 0 0 rgb(255, 255, 255) !important;
   }
 
+/*
+This code applies styles to label elements with the class "active".
+The text color is set to an RGB value of (220, 177, 248), which represents a shade of purple.
+"!important" ensures that these styles override any other conflicting styles.
+*/
 label.active {
     color:rgb(220, 177, 248) !important;
 }
 
 
+/*
+This code applies styles to elements with the class "card-image".
+The background color is set to black.
+The position is set to relative, which means the element is positioned relative to its normal position.
+overflow: hidden hides any content that exceeds the dimensions of the element.
+*/
 .card-image {
     background-color: black;
     position: relative;
     overflow: hidden; 
 }
 
+/*
+This code applies styles to img elements within elements with the class "card-image".
+A transition effect is added with a duration of 0.3 seconds.
+The transition applies to the transform and box-shadow properties.
+*/
 .card-image img {
     transition: transform 0.3s, box-shadow 0.3s; 
 }
 
+/*
+This code applies styles to img elements within elements with the class "card-image" when hovered.
+The image is scaled to 1.1 times its original size.
+The brightness of the image is reduced to 60% using the filter property.
+*/
 .card-image:hover img {
     transform: scale(1.1); 
     filter: brightness(60%); 
 }
 
+/*
+This code applies styles to elements with the class "card-caption".
+The position is set to absolute, which means the element is positioned relative to its nearest positioned ancestor.
+The element is centered vertically and horizontally using top: 50%, left: 50%, and transform: translate(-50%, -50%).
+The text color is set to white.
+A 5-pixel padding is added around the element.
+The font size is set to 16 pixels.
+The initial opacity is set to 0.
+A transition effect is added to the opacity property with a duration of 0.3 seconds.
+*/
 .card-caption {
     position: absolute;
     top: 50%;
@@ -69,16 +139,30 @@ label.active {
     transition: opacity 0.3s; 
 }
 
+/*
+This code applies styles to elements with the class "card-caption" when their parent element with the class "card-image" is hovered.
+The opacity is set to 1, making the caption visible.
+*/
 .card-image:hover .card-caption {
     opacity: 1; 
 }
 
+/*
+This code applies styles to elements with the class "search-history-container".
+The display property is set to flex, enabling a flexible layout for its children.
+The flex-direction is set to column, arranging the flex items vertically.
+*/
 .search-history-container {
     display: flex;
     flex-direction: column;
   }
 
-
+/*
+This code applies styles to elements with the class "scrollable-container".
+The position is set to fixed, which means the element is positioned relative to the browser window.
+The top, bottom, left, and right properties are set to 0, which means the element spans the entire window.
+The overflow property is set to auto, which enables scrolling when the content exceeds the container's dimensions.
+*/
 .scrollable-container {
     position: fixed;
     top: 0;
@@ -87,10 +171,22 @@ label.active {
     right: 0;
     overflow: auto;
 }
+
+/*
+This code applies styles to elements with the class "scrollable-content".
+The width and height are set to 100%, which means the content will take up the entire space of its parent container.
+*/
 .scrollable-content {
     width: 100%;
     height: 100%;
 }
+
+/*
+This code applies styles to elements with the class "scrollable-iframe".
+The width is set to 80% of its parent container.
+The height is set to 500 pixels.
+The border property is set to none, removing any border around the iframe.
+*/
 .scrollable-iframe {
     width: 80%;
     height: 500px;
