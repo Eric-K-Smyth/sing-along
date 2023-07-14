@@ -162,10 +162,12 @@ function displaySearchHistory() {
     albumIcon.className = "history-icon";
     albumIcon.style.width = '100px'; // Set width to 100px
     albumIcon.style.height = '100px'; // Set height to 100px
-
+    console.log(song);
+  var historybuttonclick = false;
     albumIcon.addEventListener('click', function () {
-      window.location.href = "lyrics.html";
       
+      historybuttonclick = true;
+      window.location.href = `lyrics.html?trackname=${song.trackName}&historybuttonclick=${historybuttonclick}`;
     });
 
     searchHistoryContainer.appendChild(albumIcon);
