@@ -162,7 +162,10 @@ This code applies styles to elements with the class "scrollable-container".
 The position is set to fixed, which means the element is positioned relative to the browser window.
 The top, bottom, left, and right properties are set to 0, which means the element spans the entire window.
 The overflow property is set to auto, which enables scrolling when the content exceeds the container's dimensions.
-*/
+*/.history-icon:hover {
+    transform: scale(1.1); 
+    filter: brightness(70%); 
+}
 .scrollable-container {
     position: fixed;
     top: 0;
