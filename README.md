@@ -1,14 +1,15 @@
 # Sing-Along
+Link to deployed page:
 https://eric-k-smyth.github.io/sing-along/
-![eric-k-smyth github io_sing-along_](https://github.com/Eric-K-Smyth/sing-along/assets/130538145/3869ee51-ee34-493c-a425-7fcbe6030925)
-![eric-k-smyth github io_sing-along_ (1)](https://github.com/Eric-K-Smyth/sing-along/assets/130538145/521a457c-1d51-4ca1-82bc-106a3c986852)
-![eric-k-smyth github io_sing-along_lyrics html](https://github.com/Eric-K-Smyth/sing-along/assets/130538145/4ea0ef96-7c92-477a-a369-e4acdee334d6)
+![Deployed Main Page](./images/main-page.jpg)
+![Deployed Page Results](./images/results.jpg)
+![Deployed Page Lyrics](./images/lyric-page.jpg)
 
 
 ## Description
 This project was built as a way for someone to search for the lyrics of their favorite songs to give them the ability to sing along!
-This project solves information on sings, artists, and lyrics not being displayed in a digestible manner.
-This project is a summarization of all we learned for phase 1 of the UoT coding bootcamp. With an emphasis on utilizing third party APIs.
+This project solves information on songs, artists, and lyrics not being displayed in a digestible manner.
+This project is a summarization of all we learned for phase 1 of the UofT Coding Bootcamp. With an emphasis on utilizing third party APIs.
 
 ## Installation
 
@@ -16,7 +17,9 @@ No installation required, runs in browser, saves to local storage, and automatic
 
 ## Usage
 Search a song name in the search bar.
-The website displays the song name, artist name, album cover, and lyrics.
+The website returns 5 songs with that name.
+Select a song by clicking on the image.
+The website redirects the user to a page that contains the lyrics to that page.
 
 ## Credits
 - Hazkeel A. Qureshi https://github.com/hazkeel27
