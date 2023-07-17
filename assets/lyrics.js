@@ -103,9 +103,9 @@ console.log(response);
       var br4 = $('<br>');
       
       artistNameSpan.text(artist);
-      songNameSpan.text(song);
+      songNameSpan.text(song).css('font-weight', 'bold');
       yearSpan.text(year);
-      genreSpan.text(genre.toUpperCase());
+      genreSpan.text(genre.toUpperCase()).css('font-style', 'italic');
       lyricsSpan.html(updatedLyricsHTML);
       songInfoDiv.append(albumCoverDiv);
       songInfoDiv.append(br1);
