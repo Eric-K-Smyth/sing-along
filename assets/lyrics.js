@@ -1,28 +1,25 @@
-console.log("pagereloaded");
-
 var lyricsContainerDiv = $('#lyric-container');
 
 var songInfoDiv = $('#song-info');
 var trackName;
 
+//retrive the query parameters of the index.html 
 const urlParams = new URLSearchParams(window.location.search);
 const trackNameHistory = urlParams.get('trackname');
 const historybuttonclick = urlParams.get('historybuttonclick');
-//console.log(historybuttonclick);
-//console.log(trackNameHistory);
 
+//if a saved track is clicked, show its lyrics
 if (historybuttonclick == "true"){
-console.log(historybuttonclick);
-console.log(trackNameHistory);
-
   trackName = trackNameHistory;
   
-} else{
+}
+else{ //else show lyrics of the searched track 
   var trackInfoArray = JSON.parse(localStorage.getItem('searchHistory'));
   var trackInfo = trackInfoArray[trackInfoArray.length - 1];
   trackName = trackInfo.trackName;
 }
 
+//object includes parameters for the ajax function
 const settings = {
   async: true,
   crossDomain: true,
@@ -35,9 +32,8 @@ const settings = {
   }
 };
 
+//ajax function retrieves the songID based on the track name
 $.ajax(settings).then(function (response) {
-console.log(response);
- // for (var i=0; i<response.hits.length; i++) {
     var songID = response.hits[0].result.id;
     const getLyrics = {
       async: true,
@@ -51,21 +47,19 @@ console.log(response);
       }
     };
 
+    // ajax function retrieves the track info and lyrics based on the songID
     $.ajax(getLyrics).then(function (lyricsUrlResponse) {
-      console.log(lyricsUrlResponse);
       var artist = lyricsUrlResponse.lyrics.tracking_data.primary_artist;
       var song = lyricsUrlResponse.lyrics.tracking_data.title;
       var year = lyricsUrlResponse.lyrics.tracking_data.created_year;
       var genre = lyricsUrlResponse.lyrics.tracking_data.primary_tag;
       var lyricsHTML = lyricsUrlResponse.lyrics.lyrics.body.html;
-      console.log(song);
-      console.log(songID);
-      console.log(lyricsHTML);
+
+      //encapsulated html code block which includes the lyrics is assigned to a variable after all the <a> tags are replaced with <span> tags
       var updatedLyricsHTML = $(lyricsHTML).find('a').replaceWith(function() {
         return '<span>' + $(this).text() + '</span>';
       }).end().prop('outerHTML');
 
-      
       const getSongDetails = {
         async: true,
         crossDomain: true,
@@ -80,6 +74,7 @@ console.log(response);
 
       var albumCoverDiv = $('<div></div>');
 
+      //ajax function retrieves the song cover
       $.ajax(getSongDetails).then(function (songDetailsUrlResponse) {
         var albumCoverUrl = songDetailsUrlResponse.song.header_image_thumbnail_url;
         var youtubeUrl = songDetailsUrlResponse.song.youtube_url;
@@ -91,6 +86,7 @@ console.log(response);
         albumCoverDiv.append(albumCoverImg);
       });
       
+      //song info, cover, and lyrics are dynamically add to the HTML page
       var artistNameSpan = $('<span></span>');
       var songNameSpan = $('<span></span>');
       var yearSpan = $('<span></span>');
@@ -120,5 +116,4 @@ console.log(response);
       lyricsContainerDiv.append(lyricsSpan);
       
     });
-  //} //for loop ends
 });
